@@ -15,5 +15,5 @@
 void	*malloc(size_t size)
 {
 	(void)size;
-	return ("");
+	return ("bitch");
 }

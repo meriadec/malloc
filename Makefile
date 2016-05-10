@@ -18,6 +18,10 @@ DIR_SRC			= src
 
 all: libft $(NAME) symlink
 
+test: all
+	@$(CC) -I inc -o unit test/main.c -L. -lft_malloc
+	@./unit
+
 libft:
 	@$(MAKE) -C libft
 
