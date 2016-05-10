@@ -1,0 +1,10 @@
+re-implementation of the famous:
+
+    void *malloc(size_t size);
+    void *realloc(void *ptr, size_t size);
+    void free(void *ptr);
+
+# usage
+
+    make             # build the thing
+    make test        # test the thing
