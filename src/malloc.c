@@ -10,10 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/mman.h>
 #include <stdlib.h>
 
 void	*malloc(size_t size)
 {
-	(void)size;
-	return ("bitch");
+	void *mem;
+
+	if (!(mem = mmap(0, size, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)))
+		return (NULL);
+	return (mem);
 }
