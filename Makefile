@@ -2,28 +2,32 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-NAME				= libft_malloc_${HOSTTYPE}.so
-LINKED_NAME	= libft_malloc.so
+NAME			= libft_malloc_${HOSTTYPE}.so
+LINKED_NAME		= libft_malloc.so
 
-CC					= clang
-FLAG				= -shared -Wall -Werror -Wextra -pedantic
-INCS				= -I inc -I libft/inc
-LIBS				= -L libft -lft
+CC				= clang
+FLAG			= -shared -Wall -Werror -Wextra -pedantic
+INCS			= -I inc
+LIBS			=
 
-SRC					= $(DIR_SRC)/malloc.c \
-							$(DIR_SRC)/realloc.c \
-							$(DIR_SRC)/free.c \
+SRC				= $(DIR_SRC)/malloc.c \
+				$(DIR_SRC)/realloc.c \
+				$(DIR_SRC)/free.c \
+				$(DIR_SRC)/show_alloc_mem.c \
+				$(DIR_SRC)/request_space.c \
+				$(DIR_SRC)/find_free_block.c \
+				$(DIR_SRC)/get_base.c \
 
 DIR_SRC			= src
 
-all: libft $(NAME) symlink
+all: $(NAME) symlink
+
+norme:
+	@norminette src/*.c inc/*.h
 
 test: all
-	@$(CC) -I inc -o unit test/main.c -L. -lft_malloc
-	@./unit
-
-libft:
-	@$(MAKE) -C libft
+	@$(CC) -I inc -o test/unit test/main.c -L. -lft_malloc
+	@./test/unit
 
 symlink:
 	@if [ ! -e ${LINKED_NAME} ]; then \
@@ -33,20 +37,20 @@ symlink:
 
 $(NAME): $(SRC)
 	@printf "\e[32m------------------------------------------------------\e[0m\n"
-	@$(CC) $(FLAG) $(SRC) $(LIBS) -o $(NAME)
+	@$(CC) $(INCS) $(FLAG) $(SRC) $(LIBS) -o $(NAME)
 	@printf "\e[34m%-51s\e[0m" "$@"
 	@printf "\e[32m[✔]\e[0m\n"
 	@printf "\e[32m------------------------------------------------------\e[0m\n"
 
 clean:
-	@$(MAKE) -C libft $@
+	@/bin/rm -rf .obj;
 	@printf "\e[32m[✔]\e[0m Project cleaned.\n"
 
 fclean: clean
-	@$(MAKE) -C libft $@
 	@/bin/rm -f $(NAME) $(LINKED_NAME);
+	@/bin/rm -f test/unit;
 	@printf "\e[32m[✔]\e[0m Project fcleaned.\n"
 
 re: fclean all
 
-.PHONY: clean fclean re libft
+.PHONY: clean fclean re

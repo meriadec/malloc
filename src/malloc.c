@@ -10,15 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/mman.h>
-#include <stdlib.h>
+#include "libft_malloc.h"
 
 void	*malloc(size_t size)
 {
-	void *mem;
+	t_block		*block;
+	t_block		*last;
 
-	if (!(mem = mmap(0, size, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if (size <= 0)
 		return (NULL);
-	return (mem);
+	if (!get_base())
+	{
+		block = request_space(NULL, size);
+		if (!block)
+			return (NULL);
+		set_base(block);
+	}
+	else
+	{
+		last = get_base();
+		block = find_free_block(&last, size);
+		if (!block)
+		{
+			block = request_space(last, size);
+			if (!block)
+				return (NULL);
+		}
+		else
+			block->free = 0;
+	}
+	return (block + 1);
 }

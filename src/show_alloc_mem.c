@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlstadd.c                                       :+:      :+:    :+:   */
+/*   00000000000.0                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/04 15:06:44 by mpillet           #+#    #+#             */
-/*   Updated: 2014/02/05 18:02:29 by mpillet          ###   ########.fr       */
+/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
+/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-void	ft_dlstadd(t_dlist **alst, t_dlist *new)
+void		show_alloc_mem(void)
 {
-	if (new)
+	t_block		*block;
+
+	block = (t_block *)(get_base());
+
+	while (block)
 	{
-		new->next = *alst;
-		*alst = new;
-		if ((*alst)->next)
-			(*alst)->next->prev = *alst;
+		printf("ZONE %lu\n", block->size);
+		printf("%p\n", (void *)block);
+		block = block->next;
 	}
 }

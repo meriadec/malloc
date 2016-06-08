@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   00000000000.0                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 11:09:24 by mpillet           #+#    #+#             */
-/*   Updated: 2014/04/19 11:48:39 by mpillet          ###   ########.fr       */
+/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
+/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_malloc.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void *g_base = NULL;
+
+void *get_base(void)
 {
-	size_t	i;
+	return g_base;
+}
 
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-		{
-			return (&((unsigned char *)s)[i]);
-		}
-		i++;
-	}
-	return (NULL);
+void set_base(void *val)
+{
+	g_base = val;
 }

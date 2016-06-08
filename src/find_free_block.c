@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   00000000000.0                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/21 19:08:58 by mpillet           #+#    #+#             */
-/*   Updated: 2014/04/19 11:51:06 by mpillet          ###   ########.fr       */
+/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
+/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "libft_malloc.h"
 
-char	*ft_strnew(size_t size)
+t_block		*find_free_block(t_block **last, size_t size)
 {
-	char	*str;
-	size_t	i;
+	t_block		*cur;
 
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (str)
+	cur = (t_block *)(get_base());
+	while (cur && !(cur->free && cur->size >= size))
 	{
-		i = 0;
-		while (i <= size)
-		{
-			str[i] = '\0';
-			i++;
-		}
+		*last = cur;
+		cur = cur->next;
 	}
-	return (str);
+	return cur;
 }
