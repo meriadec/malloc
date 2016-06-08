@@ -10,46 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/mman.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 #include "libft_malloc.h"
 
-void	*malloc(size_t size)
+size_t		get_size_for(size_t size, int *type)
 {
-	t_block		*block;
-	t_block		*last;
-	t_zone		*zone;
+	int		content_size;
+	int		final_size;
+	int		page_size;
 
-	if (size <= 0)
-		return (NULL);
-
-	block = NULL;
-	request_zone_and_last(&zone, &last, size);
-	if (!zone)
-	{
-		zone = create_zone(size);
-		if (!zone)
-			return (NULL);
-	}
-
-	if (!block)
-		return (NULL);
-	/*
-	if (!get_base())
-	{
-		set_base(block);
-	}
+	page_size = getpagesize();
+	content_size = size + ZONE_SIZE;
+	if (content_size > SMALL_SIZE * page_size)
+		final_size = page_size + ();
+	else if (content_size > TINY_SIZE * page_size)
+		final_size = SMALL_SIZE;
 	else
-	{
-		last = get_base();
-		block = find_free_block(&last, size);
-		if (!block)
-		{
-			block = request_space(last, size);
-			if (!block)
-				return (NULL);
-		}
-		else
-			block->free = 0;
-	}
-	*/
-	return (block + 1);
+		final_size = TINY_SIZE;
+}
+
+t_zone		*create_zone(size_t size)
+{
+	t_zone		*zone;
+	size_t		final_size;
+	int			zone_type;
+	int 		prot = PROT_READ | PROT_WRITE;
+	int 		flags = MAP_ANON | MAP_PRIVATE;
+
+	final_size = get_size_for(size, &zone_type);
+	printf("creating page of %lu\n", final_size);
+	if (MAP_FAILED == (zone = mmap(0, final_size + ZONE_SIZE, prot, flags, -1, 0)))
+		return (NULL);
+	return (zone);
 }

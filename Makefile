@@ -13,6 +13,8 @@ LIBS			=
 SRC				= $(DIR_SRC)/malloc.c \
 				$(DIR_SRC)/realloc.c \
 				$(DIR_SRC)/free.c \
+				$(DIR_SRC)/create_zone.c \
+				$(DIR_SRC)/request_zone_and_last.c \
 				$(DIR_SRC)/show_alloc_mem.c \
 				$(DIR_SRC)/request_space.c \
 				$(DIR_SRC)/find_free_block.c \

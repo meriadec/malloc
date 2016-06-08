@@ -21,7 +21,7 @@ t_block		*request_space(t_block *last, size_t size)
 	int 		prot = PROT_READ | PROT_WRITE;
 	int 		flags = MAP_ANON | MAP_PRIVATE;
 
-	if (MAP_FAILED == (block = mmap(0, size + META_SIZE, prot, flags, -1, 0)))
+	if (MAP_FAILED == (block = mmap(0, size + BLOCK_SIZE, prot, flags, -1, 0)))
 		return (NULL);
 	if (last)
 		last->next = block;
