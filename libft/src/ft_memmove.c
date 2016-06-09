@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/19 11:09:10 by mpillet           #+#    #+#             */
+/*   Updated: 2013/11/25 10:58:21 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include <stdlib.h>
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	t_block		*cur;
+	void	*cpy;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
-	{
-		*last = cur;
-		cur = cur->next;
-	}
-	return (cur);
+	cpy = malloc(n);
+	ft_memcpy(cpy, s2, n);
+	ft_memcpy(s1, cpy, n);
+	free(cpy);
+	return (s1);
 }

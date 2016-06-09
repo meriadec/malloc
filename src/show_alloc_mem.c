@@ -12,16 +12,69 @@
 
 #include "libft_malloc.h"
 
-void		show_alloc_mem(void)
+char		*zone_label(int zone_type)
 {
-	t_block		*block;
+	if (zone_type == 0)
+		return ("TINY");
+	else if (zone_type == 1)
+		return ("SMALL");
+	else
+		return ("LARGE");
+}
 
-	block = (t_block *)(get_base());
+void		show_address(void *e)
+{
+	char	a[16];
+	char	res[9];
+	int		n;
+	int		c;
 
+	ft_memcpy(a, "0123456789ABCDEF", 16);
+	ft_bzero(res, 9);
+	ft_memset(res, '0', 8);
+	c = 7;
+	n = (int)e;
+	res[c--] = a[n % 16];
+	while ((int)(n /= 16) > 0 && c > -1)
+		res[c--] = a[n % 16];
+	ft_putstr("0x1");
+	ft_putstr(res);
+}
+
+void		show_block(t_block *block)
+{
+	ft_putstr("bloc ");
+	show_address(block);
+	ft_putstr("\n");
+}
+
+void		show_zone(t_zone *zone)
+{
+	t_block	*block;
+
+	ft_putstr(zone_label(zone->type));
+	ft_putstr(" : ");
+	show_address(zone);
+	ft_putstr(" (");
+	ft_idiot_putnbr((int)zone->remaining);
+	ft_putstr(" octets remaining)");
+	ft_putstr("\n");
+	block = zone->base;
 	while (block)
 	{
-		printf("ZONE %lu\n", block->size);
-		printf("%p\n", (void *)block);
+		show_block(block);
 		block = block->next;
+	}
+}
+
+void		show_alloc_mem(void)
+{
+	t_zone		*zone;
+
+	zone = (t_zone *)(get_base());
+	while (zone)
+	{
+		show_zone(zone);
+		zone = zone->next;
 	}
 }

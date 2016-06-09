@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_lstpush.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/12/02 17:37:04 by mpillet           #+#    #+#             */
+/*   Updated: 2013/12/05 14:56:37 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	ft_lstpush(t_list **alst, t_list *new)
 {
-	t_block		*cur;
+	t_list	*tmp;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	if (*alst)
 	{
-		*last = cur;
-		cur = cur->next;
+		tmp = *alst;
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = new;
 	}
-	return (cur);
+	else
+	{
+		*alst = new;
+	}
 }

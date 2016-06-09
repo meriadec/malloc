@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_stronly.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: bgronon <bgronon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2014/03/04 16:09:12 by bgronon           #+#    #+#             */
+/*   Updated: 2014/03/04 16:18:34 by bgronon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
-
-t_block		*find_free_block(t_block **last, size_t size)
+int		ft_stronly(char *str, int (*fn)(int c))
 {
-	t_block		*cur;
+	int		i;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	i = 0;
+	while (str[i] != '\0')
 	{
-		*last = cur;
-		cur = cur->next;
+		if (!fn(str[i]))
+			return (0);
+		++i;
 	}
-	return (cur);
+	return (1);
 }

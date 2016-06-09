@@ -14,6 +14,8 @@
 # define LIBFT_MALLOC_H
 # include <stdlib.h>
 
+# include "libft.h"
+
 # include <stdio.h>
 
 # define BLOCK_SIZE sizeof(t_block)
@@ -47,11 +49,20 @@ void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem();
 
 t_zone				*create_zone(size_t size);
-void				request_zone_and_last(t_zone **zone, t_block **last, size_t size);
-t_block				*request_space(t_block *last, size_t size);
+void				request_zone_and_last(t_zone **zone, t_block **last,
+		size_t size);
+t_block				*request_space(t_zone *zone, t_block *last, size_t size);
 t_block				*find_free_block(t_block **last, size_t size);
 
 void				*get_base(void);
-void 				set_base(void *val);
+void				set_base(void *val);
+
+/*
+** dumb things, because dumb subject
+** no printf.. because nobody use printf
+** in the real world, of course, genius -.-
+*/
+
+void				ft_idiot_putnbr(int n);
 
 #endif

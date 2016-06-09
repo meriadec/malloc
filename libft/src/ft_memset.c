@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/19 11:06:55 by mpillet           #+#    #+#             */
+/*   Updated: 2014/04/19 11:49:08 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_block		*cur;
+	size_t		count;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	count = 0;
+	while (count < len)
 	{
-		*last = cur;
-		cur = cur->next;
+		((char *)b)[count] = (char)c;
+		count++;
 	}
-	return (cur);
+	return (b);
 }

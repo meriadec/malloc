@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/20 11:01:09 by mpillet           #+#    #+#             */
+/*   Updated: 2014/03/05 12:41:28 by bgronon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+char	*ft_strcpy(char *s1, const char *s2)
 {
-	t_block		*cur;
+	int		i;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	i = 0;
+	while (s2[i] != '\0')
 	{
-		*last = cur;
-		cur = cur->next;
+		s1[i] = s2[i];
+		i++;
 	}
-	return (cur);
+	s1[i] = '\0';
+	return (s1);
 }

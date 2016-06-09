@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/21 11:56:43 by mpillet           #+#    #+#             */
+/*   Updated: 2013/11/25 12:43:33 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+int		ft_tolower(int c)
 {
-	t_block		*cur;
-
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	if (c > 64 && c < 91)
 	{
-		*last = cur;
-		cur = cur->next;
+		return (c + 32);
 	}
-	return (cur);
+	return (c);
 }

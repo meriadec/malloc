@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/22 15:11:06 by mpillet           #+#    #+#             */
+/*   Updated: 2014/01/29 22:34:25 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include <unistd.h>
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	ft_putstr(char const *s)
 {
-	t_block		*cur;
-
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
-	{
-		*last = cur;
-		cur = cur->next;
-	}
-	return (cur);
+	write(1, s, ft_strlen(s));
 }

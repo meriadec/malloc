@@ -10,25 +10,63 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/mman.h>
 #include <stdlib.h>
-
 #include "libft_malloc.h"
 
-t_block		*request_space(t_zone *zone, t_block *last, size_t size)
+static int					dumb_get_length(int n, int negative)
 {
-	t_block		*block;
+	int		length;
 
-	if (MAP_FAILED == (block = mmap(0, size + BLOCK_SIZE,
-					PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
-		return (NULL);
-	if (last)
-		last->next = block;
+	length = (n == 0) ? 1 : 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		length++;
+	}
+	if (negative)
+	{
+		length++;
+	}
+	return (length);
+}
+
+static void					moron_norme_loop(char *str, int *n, int *length)
+{
+	while ((*n) != 0)
+	{
+		str[(*length)] = (*n) % 10 + '0';
+		(*n) = (*n) / 10;
+		(*length)--;
+	}
+}
+
+static void					ft_idiot_itoa(int n, char *str)
+{
+	int		length;
+	int		negative;
+
+	if (n == -2147483648)
+		ft_memcpy(str, "-2147483648", 11);
 	else
-		zone->base = block;
-	block->size = size;
-	block->next = NULL;
-	block->free = 0;
-	zone->remaining -= size + BLOCK_SIZE;
-	return (block);
+	{
+		negative = (n < 0) ? 1 : 0;
+		n = (n < 0) ? -n : n;
+		length = dumb_get_length(n, negative);
+		if (str)
+		{
+			length--;
+			str[length] = '0';
+			moron_norme_loop(str, &n, &length);
+			str[0] = negative ? '-' : str[0];
+		}
+	}
+}
+
+void						ft_idiot_putnbr(int n)
+{
+	char		str[255];
+
+	ft_bzero(str, 255);
+	ft_idiot_itoa(n, str);
+	ft_putstr(str);
 }

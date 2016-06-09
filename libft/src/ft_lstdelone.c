@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/25 18:32:12 by mpillet           #+#    #+#             */
+/*   Updated: 2014/03/02 23:42:22 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include <stdlib.h>
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	t_block		*cur;
-
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	if (*alst)
 	{
-		*last = cur;
-		cur = cur->next;
+		del((void *)((*alst)->content), (*alst)->content_size);
+		free(*alst);
+		*alst = NULL;
 	}
-	return (cur);
 }

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_charin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/12/06 12:38:15 by mpillet           #+#    #+#             */
+/*   Updated: 2013/12/06 12:38:57 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+int		ft_charin(char *str, char c)
 {
-	t_block		*cur;
-
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	while (*str)
 	{
-		*last = cur;
-		cur = cur->next;
+		if (*str == c)
+			return (1);
+		++str;
 	}
-	return (cur);
+	return (0);
 }

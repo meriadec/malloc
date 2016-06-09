@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/19 11:09:24 by mpillet           #+#    #+#             */
+/*   Updated: 2014/04/19 11:48:39 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_block		*cur;
+	size_t	i;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	i = 0;
+	while (i < n)
 	{
-		*last = cur;
-		cur = cur->next;
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+		{
+			return (&((unsigned char *)s)[i]);
+		}
+		i++;
 	}
-	return (cur);
+	return (NULL);
 }

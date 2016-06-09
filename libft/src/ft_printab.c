@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_printab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: bgronon <bgronon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2014/03/01 19:02:12 by bgronon           #+#    #+#             */
+/*   Updated: 2014/03/01 19:05:11 by bgronon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	ft_printab(char **tab)
 {
-	t_block		*cur;
-
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	while (tab && *tab)
 	{
-		*last = cur;
-		cur = cur->next;
+		ft_putendl(*tab);
+		++tab;
 	}
-	return (cur);
 }

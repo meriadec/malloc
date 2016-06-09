@@ -20,6 +20,12 @@ void		request_zone_and_last(t_zone **zone, t_block **last, size_t size)
 	*last = NULL;
 	base_zone = get_base();
 	if (!base_zone)
-		return;
+	{
+		*zone = create_zone(size);
+		set_base(*zone);
+	}
+	else
+	{
+	}
 	(void)size;
 }

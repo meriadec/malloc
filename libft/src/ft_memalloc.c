@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00000000000.0                                      :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 0000000 <000000@00.00>                     +#+  +:+       +#+        */
+/*   By: mpillet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 0000/00/00 00:00:00 by 0000000           #+#    #+#             */
-/*   Updated: 0000/00/00 00:00:00 by 0000000          ###   ########.fr       */
+/*   Created: 2013/11/21 18:43:56 by mpillet           #+#    #+#             */
+/*   Updated: 2014/04/19 11:48:25 by mpillet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_malloc.h"
+#include <stdlib.h>
+#include "libft.h"
 
-t_block		*find_free_block(t_block **last, size_t size)
+void	*ft_memalloc(size_t size)
 {
-	t_block		*cur;
+	void	*mem;
 
-	cur = (t_block *)(get_base());
-	while (cur && !(cur->free && cur->size >= size))
+	mem = NULL;
+	if (size)
 	{
-		*last = cur;
-		cur = cur->next;
+		mem = (void *)malloc(size);
+		if (mem)
+		{
+			ft_bzero(mem, size);
+		}
 	}
-	return (cur);
+	return (mem);
 }

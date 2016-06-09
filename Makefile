@@ -6,9 +6,10 @@ NAME			= libft_malloc_${HOSTTYPE}.so
 LINKED_NAME		= libft_malloc.so
 
 CC				= clang
-FLAG			= -shared -Wall -Werror -Wextra -pedantic
-INCS			= -I inc
-LIBS			=
+FLAG			= -shared
+#FLAG			= -shared -Wall -Werror -Wextra -pedantic
+INCS			= -I inc -I libft/inc
+LIBS			= -L libft -lft
 
 SRC				= $(DIR_SRC)/malloc.c \
 				$(DIR_SRC)/realloc.c \
@@ -18,17 +19,21 @@ SRC				= $(DIR_SRC)/malloc.c \
 				$(DIR_SRC)/show_alloc_mem.c \
 				$(DIR_SRC)/request_space.c \
 				$(DIR_SRC)/find_free_block.c \
+				$(DIR_SRC)/ft_idiot_putnbr.c \
 				$(DIR_SRC)/get_base.c \
 
 DIR_SRC			= src
 
-all: $(NAME) symlink
+all: libft $(NAME) symlink
+
+libft:
+	@make -C libft
 
 norme:
 	@norminette src/*.c inc/*.h
 
 test: all
-	@$(CC) -I inc -o test/unit test/main.c -L. -lft_malloc
+	@$(CC) $(INCS) -o test/unit test/main.c -L. -lft_malloc
 	@./test/unit
 
 symlink:
@@ -45,14 +50,16 @@ $(NAME): $(SRC)
 	@printf "\e[32m------------------------------------------------------\e[0m\n"
 
 clean:
+	@make -C libft $@
 	@/bin/rm -rf .obj;
 	@printf "\e[32m[✔]\e[0m Project cleaned.\n"
 
 fclean: clean
+	@make -C libft $@
 	@/bin/rm -f $(NAME) $(LINKED_NAME);
 	@/bin/rm -f test/unit;
 	@printf "\e[32m[✔]\e[0m Project fcleaned.\n"
 
 re: fclean all
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re libft

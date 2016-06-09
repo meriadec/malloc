@@ -14,12 +14,12 @@
 
 void *g_base = NULL;
 
-void *get_base(void)
+void	*get_base(void)
 {
-	return g_base;
+	return (g_base);
 }
 
-void set_base(void *val)
+void	set_base(void *val)
 {
 	g_base = val;
 }

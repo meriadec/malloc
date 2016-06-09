@@ -5,7 +5,7 @@
 int main(void)
 {
 	printf("Testing...\n");
-	char *toto = (char *)malloc(142);
+	char *toto = (char *)malloc(5000);
 	char *tata = (char *)malloc(42);
 
 	show_alloc_mem();
