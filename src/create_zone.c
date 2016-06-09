@@ -16,8 +16,8 @@
 
 #include "libft_malloc.h"
 
-static void	idiotic_useless_norme_function_1(int *final_size, int *type,
-		size_t *remaining, int val_to_assign_to_final_size)
+static void	idiotic_useless_norme_function_1(size_t *final_size, int *type,
+		size_t *remaining, size_t val_to_assign_to_final_size)
 {
 	*final_size = val_to_assign_to_final_size;
 	*type = LARGE_TYPE;
@@ -26,9 +26,9 @@ static void	idiotic_useless_norme_function_1(int *final_size, int *type,
 
 size_t		get_size_for(size_t size, int *type, size_t *remaining)
 {
-	int		content_size;
-	int		final_size;
-	int		page_size;
+	size_t		content_size;
+	size_t		final_size;
+	size_t		page_size;
 
 	page_size = getpagesize();
 	content_size = size + ZONE_SIZE;
@@ -39,13 +39,13 @@ size_t		get_size_for(size_t size, int *type, size_t *remaining)
 	{
 		final_size = SMALL_SIZE * page_size;
 		*type = SMALL_TYPE;
-		*remaining = final_size - SMALL_SIZE;
+		*remaining = final_size - ZONE_SIZE;
 	}
 	else
 	{
 		final_size = TINY_SIZE * page_size;
 		*type = TINY_TYPE;
-		*remaining = final_size - TINY_SIZE;
+		*remaining = final_size - ZONE_SIZE;
 	}
 	return (final_size);
 }
@@ -65,6 +65,5 @@ t_zone		*create_zone(size_t size)
 	zone->remaining = remaining;
 	zone->base = NULL;
 	zone->next = NULL;
-	printf("%lu\n", remaining);
 	return (zone);
 }
