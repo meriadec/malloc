@@ -29,6 +29,7 @@ t_block		*request_space(t_zone *zone, t_block *last, size_t size)
 	block->size = size;
 	block->next = NULL;
 	block->free = 0;
-	zone->remaining -= size + BLOCK_SIZE;
+	if (zone->type != LARGE_TYPE)
+		zone->remaining -= size + BLOCK_SIZE;
 	return (block);
 }

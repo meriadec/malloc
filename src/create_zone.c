@@ -50,6 +50,27 @@ size_t		get_size_for(size_t size, int *type, size_t *remaining)
 	return (final_size);
 }
 
+t_zone		*get_last_zone(void)
+{
+	t_zone *last;
+
+	last = get_base();
+	while (last && last->next)
+		last = last->next;
+	return (last);
+}
+
+void		chain_zone(t_zone *zone)
+{
+	t_zone *last;
+
+	last = get_last_zone();
+	if (last)
+		last->next = zone;
+	else
+		set_base(zone);
+}
+
 t_zone		*create_zone(size_t size)
 {
 	t_zone		*zone;
@@ -65,5 +86,6 @@ t_zone		*create_zone(size_t size)
 	zone->remaining = remaining;
 	zone->base = NULL;
 	zone->next = NULL;
+	chain_zone(zone);
 	return (zone);
 }

@@ -43,9 +43,12 @@ void		show_address(void *e)
 
 void		show_block(t_block *block)
 {
-	ft_putstr("bloc ");
-	show_address(block);
-	ft_putstr("\n");
+	show_address(block + BLOCK_SIZE);
+	ft_putstr(" - ");
+	show_address(block + BLOCK_SIZE + block->size);
+	ft_putstr(" : ");
+	ft_idiot_putnbr(block->size);
+	ft_putstr(" octets\n");
 }
 
 void		show_zone(t_zone *zone)
@@ -55,9 +58,6 @@ void		show_zone(t_zone *zone)
 	ft_putstr(zone_label(zone->type));
 	ft_putstr(" : ");
 	show_address(zone);
-	ft_putstr(" (");
-	ft_idiot_putnbr((int)zone->remaining);
-	ft_putstr(" octets remaining)");
 	ft_putstr("\n");
 	block = zone->base;
 	while (block)
